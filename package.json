@@ -1,0 +1,21 @@
+{
+  "name": "taf",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "local": "playwright test --config=playwright.local.config.ts --headed",
+    "web": "playwright test --config=playwright.web.config.ts --headed"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "allure-playwright": "^2.15.0",
+    "playwright": "^1.42.1",
+    "winston": "^3.12.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.42.1",
+    "@types/node": "^20.11.30"
+  }
+}
