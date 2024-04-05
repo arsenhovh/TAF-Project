@@ -11,6 +11,7 @@
   "description": "",
   "dependencies": {
     "allure-playwright": "^2.15.0",
+    "dotenv": "^16.4.5",
     "playwright": "^1.42.1",
     "winston": "^3.12.0"
   },

@@ -1,6 +1,5 @@
 import { Locator, Page } from '@playwright/test';
-import Users from '../../Core/Constant';
-import {BasePage} from "./Base";
+import Users from '../constant';
 
 export class LoginPage{
     readonly page: Page;
