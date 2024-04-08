@@ -1,7 +1,8 @@
 import { Locator, Page } from '@playwright/test';
+import {BasePage} from "./Base";
 const logger = require('../logger');
 
-export class Dashboards {
+export class Dashboards extends BasePage{
     readonly page: Page;
     readonly successfullySignInMsg: Locator;
     readonly addNewDashboardButton: Locator;
@@ -19,7 +20,7 @@ export class Dashboards {
     readonly updateButtonFromEditPopup: Locator;
 
     constructor(page) {
-        this.page = page;
+        super(page);
         this.successfullySignInMsg = page.getByText('Signed in successfully');
         this.addNewDashboardButton = page.locator('.addDashboardButton__add-dashboard-btn--acseh button')
         this.newDashboardNameFromPopup = page.getByPlaceholder('Enter dashboard name');
@@ -46,15 +47,15 @@ export class Dashboards {
         logger.info('Dashboard is deleted');
     }
 
-    async fillDashboardPopupInputsAndSave(dashboardName: string , description: string){
-        await this.newDashboardNameFromPopup.fill(dashboardName);
-        await this.description.fill(description);
+    async fillDashboardPopupInputsAndSave(dashboardObj){
+        await this.newDashboardNameFromPopup.fill(dashboardObj.dashboardName);
+        await this.description.fill(dashboardObj.description);
         await this.addDashboardButtonFromPopup.click();
     }
-    async udpateDashboardPopupInputsAndSave(dashboardName: string , description?: string){
-        await this.newDashboardNameFromPopup.fill(dashboardName);
-        if (description){
-            await this.description.fill(description);
+    async udpateDashboardPopupInputsAndSave(dashboardObj ){
+        await this.newDashboardNameFromPopup.fill(dashboardObj.dashboardName);
+        if (dashboardObj.description){
+            await this.description.fill(dashboardObj.description);
         }
         await this.updateButtonFromEditPopup.click();
     }

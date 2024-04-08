@@ -1,21 +1,23 @@
-import { getPage } from './index';
 import {Page} from "@playwright/test";
+import {LoginPage} from "./loginPage";
+import {Dashboards} from "./dashbord";
 
 export class BasePage {
    readonly page: Page;
-   readonly pages: Record<string, any>;
 
-  constructor(page: any) {
+  constructor(page: Page) {
     this.page = page;
-    this.pages = {};
   }
 
    getPage(pageName: string) {
-    if (this.pages[pageName]) {
-      return this.pages[pageName];
-    }
-    this.pages[pageName] = getPage(pageName, this.page);
-    return this.pages[pageName];
+       switch (pageName) {
+           case 'login':
+               return new LoginPage(this.page);
+           case 'dashboard':
+               return new Dashboards(this.page);
+           default:
+               throw new Error(`Page '${pageName}' not found.`);
+       }
   }
 
    async goto(url: string) {

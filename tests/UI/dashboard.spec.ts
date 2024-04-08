@@ -1,5 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { BasePage } from "../../core/pageObject/Base";
+import { Dashboards } from '../../core/constant';
+
 const logger = require('logger');
 
 let basePage;
@@ -15,18 +17,20 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('Check that user can add new dashboard', async () => {
+    const dashboardData =Dashboards.dashboard1
     logger.info('Starting test: Check that user can add new dashboard');
     await dashboardPage.addNewDashboard();
-    await dashboardPage.fillDashboardPopupInputsAndSave('New Dashboard1', 'Some Description2')
+    await dashboardPage.fillDashboardPopupInputsAndSave(dashboardData)
     await expect.soft(dashboardPage.dashboardAddedSuccessfully).toBeVisible();
     await expect.soft(dashboardPage.dashboardNameFromMenu).toHaveText('New Dashboard1');
     logger.info('Test: Check that user can add new dashboard - Passed');
 });
 
-test('Check that user can delete newly add dashboard', async () => {
+test.only('Check that user can delete newly add dashboard', async () => {
+    const dashboardData =Dashboards.dashboard2
     logger.info('Starting test: Check that user can delete newly add dashboard');
     await dashboardPage.addNewDashboard();
-    await dashboardPage.fillDashboardPopupInputsAndSave('New Dashboard2', 'Some Description2')
+    await dashboardPage.fillDashboardPopupInputsAndSave(dashboardData)
     await  dashboardPage.deleteDashboard()
     await expect.soft(dashboardPage.dashboardDeletedSuccessfully).toBeVisible();
     await expect.soft(dashboardPage.dashboardNameFromMenu).not.toBeVisible();
@@ -35,12 +39,14 @@ test('Check that user can delete newly add dashboard', async () => {
 });
 
 test('Check that user can edit newly add dashboard', async () => {
+    const dashboardData =Dashboards.dashboard3
+    const dashboardDataForEdit =Dashboards.dashboardEdit
     logger.info('Starting test: Check that user can edit newly add dashboard');
     await dashboardPage.addNewDashboard();
-    await dashboardPage.fillDashboardPopupInputsAndSave('New Dashboard3', 'Some Description3')
+    await dashboardPage.fillDashboardPopupInputsAndSave(dashboardData)
     await dashboardPage.editDashboardButton.click();
-    await dashboardPage.udpateDashboardPopupInputsAndSave('Edit Dashboard3', 'Edit Description3')
-    await expect.soft(dashboardPage.dashboardNameFromMenu).toHaveText('Edit Dashboard3');
+    await dashboardPage.udpateDashboardPopupInputsAndSave(dashboardDataForEdit)
+    await expect.soft(dashboardPage.dashboardNameFromMenu).toHaveText(dashboardDataForEdit.dashboardName);
     logger.info('Verified that Dashboard Name From Menu has text "Edit Dashboard3"');
     logger.info('Test: Check that user can edit newly add dashboard - Passed');
 });

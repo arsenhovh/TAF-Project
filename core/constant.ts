@@ -1,9 +1,16 @@
-import { config } from 'dotenv';
 import { User } from './objects/User';
-config();
+import { Dashboard } from './objects/Dashboard';
 
-class Users {
-    testUser = new User(process.env.USERNAME, process.env.PASSWORD);
+
+export class Users {
+    static testUser = new User(process.env.USERNAME, process.env.PASSWORD);
 }
 
-export default new Users();
+export class Dashboards {
+    static dashboard1 = new Dashboard('New Dashboard1', 'Some Description1');
+    static dashboard2 = new Dashboard('New Dashboard2', 'Some Description2');
+    static dashboard3 = new Dashboard('New Dashboard3', 'Some Description3');
+    static dashboardEdit = new Dashboard('Edit Dashboard3', 'Edit Description3');
+}
+
+
