@@ -10,24 +10,24 @@ let loginPage;
 
 test.beforeEach(async ({ page }) => {
     basePage = new BasePage(page);
-    dashboardPage = basePage.getPage('dashboard');
-    loginPage = basePage.getPage('login');
-    await basePage.goto('web');
+    dashboardPage = BasePage.getPage(page, 'dashboard');
+    loginPage = BasePage.getPage(page, 'login');
+    await page.goto('/');
     await loginPage.loginAsTestUser();
 });
 
 test('Check that user can add new dashboard', async () => {
-    const dashboardData =Dashboards.dashboard1
+    const dashboardData = Dashboards.dashboard1
     logger.info('Starting test: Check that user can add new dashboard');
     await dashboardPage.addNewDashboard();
     await dashboardPage.fillDashboardPopupInputsAndSave(dashboardData)
     await expect.soft(dashboardPage.dashboardAddedSuccessfully).toBeVisible();
-    await expect.soft(dashboardPage.dashboardNameFromMenu).toHaveText('New Dashboard1');
+    await expect.soft(dashboardPage.dashboardNameFromMenu).toHaveText(dashboardData.dashboardName);
     logger.info('Test: Check that user can add new dashboard - Passed');
 });
 
-test.only('Check that user can delete newly add dashboard', async () => {
-    const dashboardData =Dashboards.dashboard2
+test('Check that user can delete newly add dashboard', async () => {
+    const dashboardData = Dashboards.dashboard2
     logger.info('Starting test: Check that user can delete newly add dashboard');
     await dashboardPage.addNewDashboard();
     await dashboardPage.fillDashboardPopupInputsAndSave(dashboardData)
@@ -39,8 +39,8 @@ test.only('Check that user can delete newly add dashboard', async () => {
 });
 
 test('Check that user can edit newly add dashboard', async () => {
-    const dashboardData =Dashboards.dashboard3
-    const dashboardDataForEdit =Dashboards.dashboardEdit
+    const dashboardData = Dashboards.dashboard3
+    const dashboardDataForEdit = Dashboards.dashboardEdit
     logger.info('Starting test: Check that user can edit newly add dashboard');
     await dashboardPage.addNewDashboard();
     await dashboardPage.fillDashboardPopupInputsAndSave(dashboardData)

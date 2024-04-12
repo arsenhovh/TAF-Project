@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "local": "playwright test --config=local.config.ts --headed",
-    "web": "playwright test --config=web.config.ts --headed"
+    "local": "playwright test --config=config/local.config.ts --headed",
+    "web": "playwright test --config=config/web.config.ts --headed"
   },
   "author": "",
   "license": "ISC",

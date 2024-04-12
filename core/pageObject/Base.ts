@@ -9,23 +9,14 @@ export class BasePage {
     this.page = page;
   }
 
-   getPage(pageName: string) {
-       switch (pageName) {
-           case 'login':
-               return new LoginPage(this.page);
-           case 'dashboard':
-               return new Dashboards(this.page);
-           default:
-               throw new Error(`Page '${pageName}' not found.`);
-       }
-  }
-
-   async goto(url: string) {
-    if (url === 'web') {
-      await this.page.goto('https://reportportal.epam.com/');
+    static getPage(page: Page, pageName: string) {
+        switch (pageName) {
+            case 'login':
+                return new LoginPage(page);
+            case 'dashboard':
+                return new Dashboards(page);
+            default:
+                throw new Error(`Page '${pageName}' not found.`);
+        }
     }
-    if (url === 'local') {
-      await this.page.goto('http://localhost:5000');
-    }
-  }
 }
