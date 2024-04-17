@@ -1,6 +1,6 @@
 export class Dashboard {
     readonly dashboardName: string;
-    readonly description: string;
+    readonly description: string | undefined;
 
     constructor(dashboardName: string, description?: string) {
         this.dashboardName = dashboardName;

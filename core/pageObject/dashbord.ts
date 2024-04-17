@@ -3,7 +3,7 @@ import {BasePage} from "./Base";
 const logger = require('../logger');
 
 export class Dashboards extends BasePage{
-    readonly page: Page;
+    readonly page: Page | undefined;
     readonly successfullySignInMsg: Locator;
     readonly addNewDashboardButton: Locator;
     readonly newDashboardNameFromPopup: Locator;
@@ -19,7 +19,7 @@ export class Dashboards extends BasePage{
     readonly confirmDeleteButton: Locator;
     readonly updateButtonFromEditPopup: Locator;
 
-    constructor(page) {
+    constructor(page: Page) {
         super(page);
         this.successfullySignInMsg = page.getByText('Signed in successfully');
         this.addNewDashboardButton = page.locator('.addDashboardButton__add-dashboard-btn--acseh button')
@@ -47,12 +47,12 @@ export class Dashboards extends BasePage{
         logger.info('Dashboard is deleted');
     }
 
-    async fillDashboardPopupInputsAndSave(dashboardObj){
+    async fillDashboardPopupInputsAndSave(dashboardObj: { dashboardName: string; description: string; }){
         await this.newDashboardNameFromPopup.fill(dashboardObj.dashboardName);
         await this.description.fill(dashboardObj.description);
         await this.addDashboardButtonFromPopup.click();
     }
-    async udpateDashboardPopupInputsAndSave(dashboardObj ){
+    async udpateDashboardPopupInputsAndSave(dashboardObj: { dashboardName: string; description: string; } ){
         await this.newDashboardNameFromPopup.fill(dashboardObj.dashboardName);
         if (dashboardObj.description){
             await this.description.fill(dashboardObj.description);

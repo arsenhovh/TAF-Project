@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 import { BasePage } from "../../core/pageObject/Base";
-import { Dashboards } from '../../core/constant';
+import {  Dashboards} from '../../core/pageObject/dashbord';
 
 const logger = require('logger');
 
