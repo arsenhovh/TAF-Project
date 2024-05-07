@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test';
 import {BasePage} from "./Base";
-const logger = require('../logger');
+import logger from '../logger';
 
 export class Dashboards extends BasePage{
     readonly page: Page | undefined;
