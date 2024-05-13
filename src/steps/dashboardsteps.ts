@@ -1,12 +1,15 @@
-import { Given, Then, Before } from '@cucumber/cucumber';
+import { Given, Then, Before,After } from '@cucumber/cucumber';
 import { Page, chromium } from 'playwright';
 import { BasePage } from "../../core/pageObject/Base";
 import {expect} from "@playwright/test";
+import { Dashboards } from '../../core/pageObject/dashbord';
+import { LoginPage } from '../../core/pageObject/loginPage';
+
 
 let browser;
 let page: Page;
-let dashboardPage:any;
-let loginPage:any;
+let dashboardPage: Dashboards
+let loginPage: LoginPage;
 
 Before(async () => {
     browser = await chromium.launch();
@@ -15,16 +18,22 @@ Before(async () => {
     loginPage = BasePage.getPage(page,'login');
 });
 
+After(async () => {
+    if (await dashboardPage.dashboardNameFromMenu.isVisible()){
+        await  dashboardPage.deleteDashboard()
+    }
+});
+
 Given('I navigate on the login page and login', async () => {
-    await page.goto('/');
+    await loginPage.open();
     await loginPage.loginAsTestUser();
 });
 
 Given('I click add new dashboard page', async () => {
-    await dashboardPage.addNewDashboardButton.click();
+    await dashboardPage.addNewDashboard();
 });
 
-Given(/^I fill "(.*)" and "(.*)" in name and description field$/, async (dashboardName, description) => {
+Given(/^I fill (.*) and (.*) in name and description field$/, async (dashboardName, description) => {
     await dashboardPage.newDashboardNameFromPopup.fill(dashboardName);
     await dashboardPage.description.fill(description);
 });
@@ -37,7 +46,7 @@ Given('I click add edit button', async () => {
     await dashboardPage.editDashboardButton.click();
 });
 
-Given(/^I expect to see newly added dashboard with name "(.*)"$/, async (dashboardName) => {
+Given(/^I expect to see newly added dashboard with name (.*)$/, async (dashboardName) => {
     await expect.soft(dashboardPage.dashboardAddedSuccessfully).toBeVisible();
     await expect.soft(dashboardPage.dashboardNameFromMenu).toHaveText(dashboardName);
 });
@@ -53,16 +62,6 @@ Given(/^I expect to not dashboard$/, async () => {
 });
 
 Given(/^I delete all dashboard$/, async () => {
-    if (await dashboardPage.dashboardNameFromMenu.isVisible()){
-        await  dashboardPage.deleteDashboard()
-    }
 
 });
-
-
-
-
-
-
-
 

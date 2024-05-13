@@ -46,7 +46,7 @@ test('Check that user can edit newly add dashboard', async () => {
     await dashboardPage.addNewDashboard();
     await dashboardPage.fillDashboardPopupInputsAndSave(dashboardData)
     await dashboardPage.editDashboardButton.click();
-    await dashboardPage.udpateDashboardPopupInputsAndSave(dashboardDataForEdit)
+    await dashboardPage.fillDashboardPopupInputsAndSave(dashboardDataForEdit ,'true')
     await expect.soft(dashboardPage.dashboardNameFromMenu).toHaveText(dashboardDataForEdit.dashboardName);
     logger.info('Verified that Dashboard Name From Menu has text "Edit Dashboard3"');
     logger.info('Test: Check that user can edit newly add dashboard - Passed');

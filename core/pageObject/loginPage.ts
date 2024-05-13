@@ -20,4 +20,8 @@ export class LoginPage extends BasePage{
         await this.passwordInput.fill(Users.testUser.getPassword());
         await this.signInButton.click();
     }
+
+    async open()    {
+        await this.page.goto('/')
+    }
 }

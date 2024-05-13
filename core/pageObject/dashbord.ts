@@ -1,9 +1,10 @@
 import { Locator, Page } from '@playwright/test';
 import {BasePage} from "./Base";
 import logger from '../logger';
+import {Dashboard} from "../objects/Dashboard";
 
 export class Dashboards extends BasePage{
-    readonly page: Page | undefined;
+    readonly page: Page;
     readonly successfullySignInMsg: Locator;
     readonly addNewDashboardButton: Locator;
     readonly newDashboardNameFromPopup: Locator;
@@ -47,16 +48,14 @@ export class Dashboards extends BasePage{
         logger.info('Dashboard is deleted');
     }
 
-    async fillDashboardPopupInputsAndSave(dashboardObj: { dashboardName: string; description: string; }){
-        await this.newDashboardNameFromPopup.fill(dashboardObj.dashboardName);
-        await this.description.fill(dashboardObj.description);
-        await this.addDashboardButtonFromPopup.click();
-    }
-    async udpateDashboardPopupInputsAndSave(dashboardObj: { dashboardName: string; description: string; } ){
+    async fillDashboardPopupInputsAndSave(dashboardObj: Dashboard,edit=false){
         await this.newDashboardNameFromPopup.fill(dashboardObj.dashboardName);
         if (dashboardObj.description){
             await this.description.fill(dashboardObj.description);
         }
-        await this.updateButtonFromEditPopup.click();
+        if(edit){
+            await this.updateButtonFromEditPopup.click();
+        }
+        await this.addDashboardButtonFromPopup.click();
     }
 }
