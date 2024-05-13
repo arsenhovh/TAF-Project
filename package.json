@@ -5,7 +5,7 @@
   "scripts": {
     "local": "npxplaywright test --config=config/local.config.ts --headed",
     "web": "npx playwright test --config=config/web.config.ts --headed",
-    "web:api": "npx playwright test tests/API/dashboardAPI.spec.ts --config=config/web.config.ts"
+    "web:api": "npx playwright test tests/API/dashboardAPIPositive.spec.ts --config=config/web.config.ts"
 
   },
   "author": "",
