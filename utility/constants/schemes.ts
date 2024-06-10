@@ -47,7 +47,7 @@ export const dataSchemaGet = {
                                     },
                                     required: [ "positionX", "positionY" ]
                                 },
-                                widgetOptions: { type: "object" } // Here you might need to provide more detailed schema
+                                widgetOptions: { type: "object" }
                             },
                             required: [ "widgetName", "widgetId", "widgetType", "widgetSize", "widgetPosition", "widgetOptions" ]
                         }
