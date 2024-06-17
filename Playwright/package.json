@@ -1,0 +1,31 @@
+{
+  "name": "taf",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "local": "npxplaywright test --config=config/local.config.ts --headed",
+    "web": "npx playwright test --config=config/web.config.ts --headed",
+    "web:api": "npx playwright test tests/API --config=config/web.config.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@playwright/test": "^1.43.1",
+    "@types/cucumber": "^7.0.0",
+    "ajv": "^8.16.0",
+    "allure-playwright": "^2.15.0",
+    "cucumber": "^6.0.7",
+    "dotenv": "^16.4.5",
+    "playwright": "^1.42.1",
+    "winston": "^3.12.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.43.1",
+    "@types/cucumber": "^7.0.0",
+    "@types/node": "^20.11.30",
+    "cucumber": "^6.0.7",
+    "ts-node": "^10.9.2"
+  }
+}
+ 
